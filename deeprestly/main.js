@@ -235,4 +235,59 @@
     });
   }
 
+  // ---------- 13. Mobile hamburger menu ----------
+  const btnMenu        = document.getElementById('btn-menu');
+  const mobileMenu     = document.getElementById('mobile-menu');
+  const iconHamburger  = document.getElementById('icon-hamburger');
+  const iconCloseMenu  = document.getElementById('icon-close-menu');
+  const btnLoginMobile = document.getElementById('btn-login-mobile');
+
+  function openMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.style.display = 'block';
+    if (iconHamburger) iconHamburger.style.display = 'none';
+    if (iconCloseMenu) iconCloseMenu.style.display = 'block';
+    if (btnMenu) btnMenu.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.style.display = 'none';
+    if (iconHamburger) iconHamburger.style.display = 'block';
+    if (iconCloseMenu) iconCloseMenu.style.display = 'none';
+    if (btnMenu) btnMenu.setAttribute('aria-expanded', 'false');
+  }
+
+  if (btnMenu) {
+    btnMenu.addEventListener('click', function() {
+      mobileMenu && mobileMenu.style.display === 'block' ? closeMobileMenu() : openMobileMenu();
+    });
+  }
+
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  }
+
+  if (btnLoginMobile) {
+    btnLoginMobile.addEventListener('click', function() {
+      closeMobileMenu();
+      openModal('accedi');
+    });
+  }
+
+  // Close mobile menu on Escape or click outside header
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
+  document.addEventListener('click', function(e) {
+    if (!mobileMenu || mobileMenu.style.display !== 'block') return;
+    if (nav && !nav.contains(e.target)) closeMobileMenu();
+  });
+  // Close on resize to desktop width
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768) closeMobileMenu();
+  });
+
 })();

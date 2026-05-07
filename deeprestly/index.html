@@ -59,6 +59,8 @@
   #cart-panel   { transition: transform 0.3s ease-in-out; }
   #cart-backdrop { transition: opacity 0.3s ease-in-out; }
   #tab-accedi, #tab-registrati { transition: color 0.2s ease, border-color 0.2s ease; border-bottom-width: 2px; border-bottom-style: solid; }
+  /* Hide desktop login btn on mobile */
+  @media (max-width: 767px) { #btn-login { display: none !important; } }
 </style>
 </head>
 <body class="bg-ivory text-ink">
@@ -95,7 +97,30 @@
       </button>
       <!-- Account -->
       <button type="button" id="btn-login" class="btn-primary text-[13px] whitespace-nowrap">Accedi o crea un account</button>
+      <!-- Hamburger: mobile only -->
+      <button type="button" id="btn-menu" aria-label="Apri menu" aria-expanded="false" class="md:hidden w-10 h-10 grid place-items-center rounded-full hover:bg-ink/8 text-ink transition-colors">
+        <svg id="icon-hamburger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg id="icon-close-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="display:none;">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile nav menu (inside header → absolute top-full) -->
+  <div id="mobile-menu" class="absolute top-full inset-x-0 bg-ivory border-b border-ivory2 shadow-soft" style="display:none;">
+    <nav class="flex flex-col px-5 py-2">
+      <a href="#come-funziona" class="py-3.5 border-b border-ivory2 text-[15px] text-ink70 hover:text-ink transition-colors">Come funziona</a>
+      <a href="#benefici"      class="py-3.5 border-b border-ivory2 text-[15px] text-ink70 hover:text-ink transition-colors">Benefici</a>
+      <a href="#recensioni"    class="py-3.5 border-b border-ivory2 text-[15px] text-ink70 hover:text-ink transition-colors">Recensioni</a>
+      <a href="#faq"           class="py-3.5 border-b border-ivory2 text-[15px] text-ink70 hover:text-ink transition-colors">FAQ</a>
+      <a href="#contatti"      class="py-3.5 border-b border-ivory2 text-[15px] text-ink70 hover:text-ink transition-colors">Contatti</a>
+      <div class="py-4">
+        <button type="button" id="btn-login-mobile" class="btn-primary w-full justify-center text-[14px]">Accedi o crea un account</button>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -430,7 +455,7 @@
       </div>
 
       <div class="overflow-x-auto reveal">
-        <table class="compare w-full max-w-4xl mx-auto text-[15px] text-ink/85">
+        <table class="compare w-full min-w-[560px] max-w-4xl mx-auto text-[15px] text-ink/85">
           <thead class="text-ink60 text-[13px] uppercase tracking-[0.18em]">
             <tr>
               <th class="font-medium">&nbsp;</th>

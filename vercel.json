@@ -1,0 +1,4 @@
+{
+  "outputDirectory": "deeprestly",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
